@@ -8,11 +8,11 @@ import Loading from '../components/Loading'
 import { Link, useParams } from 'react-router-dom'
 import { getOrderDetails, payOrder } from '../actions/orderAction'
 import { ORDER_PAY_RESET } from '../constants/orderConstants'
+// import { bindActionCreators } from 'redux'
 
 const OrderScreen = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
-    
 
 
     const [sdkReady, setSdkReady] = useState(false)
@@ -23,10 +23,6 @@ const OrderScreen = () => {
    const orderPay = useSelector(state => state.orderPay)
    const { loading:loadingPay, success:successPay } = orderPay
 
-//    const userLogin = useSelector(state => state.userLogin);
-//    const { userInfo: { _id, token } } = userLogin
-//    console.log(userLogin)
-//    console.log(token)
 
    
 if(!loading){
@@ -174,6 +170,7 @@ if(!loading){
                             )}
                         </ListGroup.Item>
                        )}
+
                     </ListGroup>
                 </Card>
             </Col>

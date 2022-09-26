@@ -4,7 +4,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { productListReducer, productDetailsReducer } from './reducers/productReducer'
 import { cartReducer } from './reducers/cartReducers'
 // import { configureStore } from '@reduxjs/toolkit'
-import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer} from './reducers/userReducers'
+import { userLoginReducer,
+        userRegisterReducer,
+        userDetailsReducer,
+        userUpdateProfileReducer,
+        usersListReducer,
+        userDeleteReducer
+    } from './reducers/userReducers'
 import { orderCreateReducer, orderDetailsReducer, orderPayReducer, myOrderListReducer } from './reducers/orderReducers'
 
 const reducer = combineReducers({
@@ -15,21 +21,15 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userProfileUpdate: userUpdateProfileReducer,
+    usersList: usersListReducer,
+    userDelete: userDeleteReducer,
     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
-    myOrders: myOrderListReducer
+    myOrders: myOrderListReducer,
 })
 
 
-
-//Reset all redux STATE in test stage
-// const rootReducer = (state, action) => {
-//   if(action.type === 'USER_LOGOUT'){
-//     return reducer(undefined, action)
-//   }
-//   return reducer(state, action)
-// }
 
 const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
