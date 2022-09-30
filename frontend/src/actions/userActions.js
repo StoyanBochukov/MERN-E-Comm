@@ -1,4 +1,5 @@
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
 import {
     USER_LOGIN_REQUEST,
     USER_LOGIN_SUCCESS,
@@ -26,7 +27,7 @@ import {
     USER_ADMIN_UPDATE_FAIL
 } from '../constants/userConstants'
 import { ORDER_MY_LIST_RESET } from "../constants/orderConstants"
-import { CART_RESET } from "../constants/cartConstants"
+import { CART_RESET, CART_RESET_SHIPPING_ADDRESS } from "../constants/cartConstants"
 
 
 export const login = ( email, password) => async(dispatch, getState) => {
@@ -57,6 +58,7 @@ export const login = ( email, password) => async(dispatch, getState) => {
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
+    // localStorage.removeItem('shippingAddress')
     dispatch({
         type: USER_LOGOUT
     })
@@ -72,6 +74,7 @@ export const logout = () => (dispatch) => {
     dispatch({
         type: USER_LIST_RESET
     })
+    
 }
 
 export const register = ( firstName, lastName, email, password) => async (dispatch) => {

@@ -20,13 +20,16 @@ const PlaceOrderScreen = () => {
         return (Math.round(num * 100) / 100).toFixed(2)
     }
     //Calculate Prices
-    cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
     cart.shippingPrice = cart.itemsPrice > 100 ? 0 : 9
     cart.taxPrice = addDecimals(Number((0.15 * cart.itemsPrice).toFixed(2)))
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2) 
 
    const orderCreate = useSelector(state => state.orderCreate)
    const { order, success, error } = orderCreate
+
+   const userLogin = useSelector(state => state.userLogin)
+   const { userInfo } = userLogin
 
 
    useEffect(() => {
@@ -38,15 +41,19 @@ const PlaceOrderScreen = () => {
 
 
     const placeOrderHandler = () => {
-        dispatch(createOrder({
-            orderItems: cart.cartItems,
-            shippingAddress: cart.shippingAddress,
-            paymentMethod: cart.paymentMethod,
-            itemsPrice: cart.itemsPrice,
-            shippingPrice: cart.shippingPrice,
-            taxPrice: cart.taxPrice,
-            totalPrice: cart.totalPrice
-        }))
+        if(!userInfo){
+            navigate('/login')
+        }else{
+            dispatch(createOrder({
+                orderItems: cart.cartItems,
+                shippingAddress: cart.shippingAddress,
+                paymentMethod: cart.paymentMethod,
+                itemsPrice: cart.itemsPrice,
+                shippingPrice: cart.shippingPrice,
+                taxPrice: cart.taxPrice,
+                totalPrice: cart.totalPrice
+            }))
+        }
     }
 
   return (
