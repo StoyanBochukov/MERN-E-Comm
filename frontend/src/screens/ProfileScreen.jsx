@@ -7,6 +7,7 @@ import Message from '../components/Message'
 import Loading from '../components/Loading'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { myOrderList } from '../actions/orderAction'
+import { USER_UPDATE_RESET } from '../constants/userConstants'
 
 
 
@@ -47,7 +48,8 @@ const ProfileScreen = () => {
         if(!userInfo){
             navigate('/login')
         }else{
-            if(!user.firstName && !user.lastName){
+            if(!user.firstName && !user.lastName && !success){
+                dispatch({type: USER_UPDATE_RESET})
                 dispatch(getUserDetails('profile'))
                 dispatch(myOrderList())
             }else{
@@ -56,7 +58,7 @@ const ProfileScreen = () => {
                 setEmail(user.email)
             }
         }
-    }, [dispatch, navigate, userInfo, user])
+    }, [dispatch, navigate, userInfo, user, success])
     
 
   return (
