@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { PayPalButton } from "react-paypal-button-v2"
+// import { PayPalButton } from "react-paypal-button-v2"
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -179,10 +179,10 @@ if(!loading){
                             
                        {!order.isPaid && userInfo && userInfo._id === order.user._id &&(
                         <ListGroup.Item>
-                            {loadingPay && <Loading />}
+                            {/* {loadingPay && <Loading />}
                             {!sdkReady ? <Loading /> : (
                                 <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler} />
-                            )}
+                            )} */}
                         </ListGroup.Item>
                        )}
 
